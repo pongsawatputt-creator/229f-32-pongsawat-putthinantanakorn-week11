@@ -6,6 +6,9 @@ public class Gravitation : MonoBehaviour
     public static List<Gravitation> otherObj;
     private Rigidbody _rb;
     const float G = 6.67f;
+
+    [SerializeField] bool isSun = false;
+    [SerializeField] int orbitSpeed = 1000;
     void Awake()
     {
         _rb = GetComponent<Rigidbody>();
@@ -14,6 +17,8 @@ public class Gravitation : MonoBehaviour
             otherObj = new List<Gravitation>();
         }
         otherObj.Add(this);
+
+        if (!isSun) { _rb.AddForce(Vector3.left * orbitSpeed, ForceMode.Acceleration); }
     }
 
     // Update is called once per frame
